@@ -9,7 +9,7 @@ class Collection implements ArrayAccess, Countable
 {
     protected $items = [];
 
-    public function __construct($items)
+    public function __construct($items = [])
     {
         if (!is_array($items)) {
             $items = [$items];
@@ -36,51 +36,125 @@ class Collection implements ArrayAccess, Countable
         return $this;
     }
 
+    /**
+     * Returns the fist element of an object
+     *
+     * @return mixed
+     */
     public function first()
     {
         return reset($this->items);
     }
 
+    /**
+     * Returns the last item of en object
+     *
+     * @return mixed
+     */
     public function last()
     {
         return end($this->items);
     }
 
+    /**
+     * Reverses the items of a collection
+     *
+     * @return Collection
+     */
     public function reverse()
     {
         return Collection::new(array_reverse($this->items));
     }
 
+    /**
+     * Randomizes the items of a collection
+     *
+     * @return mixed
+     */
     public function random()
     {
         return $this->items[array_rand($this->items)];
     }
 
+    /**
+     * Returns a specific item of a collection
+     *
+     * @param $item
+     * @return mixed
+     */
     public function get($item)
     {
         return $this->items[$item];
     }
 
+    /**
+     * Pops of an item at the end of the collection
+     *
+     * @return mixed
+     */
     public function pop()
     {
         return array_pop($this->items);
     }
 
+    /**
+     * Shifts of an item of the collection
+     *
+     * @return mixed
+     */
     public function shift()
     {
         return array_shift($this->items);
     }
 
+    /**
+     * Loops though all items in a collection
+     *
+     * @param $callback
+     */
     public function each($callback)
     {
         array_walk($this->items, $callback);
     }
 
+    /**
+     * Manipulates each item of a collection
+     *
+     * @param $callback
+     * @return Collection
+     */
     public function map($callback)
     {
         return Collection::new(array_map($callback, $this->items));
     }
 
+    /**
+     * Filter out all items of a collection
+     *
+     * @param $callback
+     * @return Collection
+     */
+    public function filter($callback)
+    {
+        return Collection::new(array_filter($this->items, $callback));
+    }
+
+    /**
+     * Reduces all items of a collection down
+     *
+     * @param $callback
+     * @return Collection
+     */
+    public function reduce($callback)
+    {
+        return Collection::new(array_reduce($this->items, $callback));
+    }
+
+    /**
+     * Convert something to array
+     *
+     * @return array
+     */
     public function toArray()
     {
         return $this->items;
