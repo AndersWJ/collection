@@ -230,4 +230,32 @@ class CollectionTest extends TestCase
 
         $this->assertEquals($result, $array);
     }
+
+    /** @test */
+    public function it_can_filter_the_collection()
+    {
+        $array = ['item1', 'item2', 'item3'];
+        $collection = Collection::new($array);
+
+        $result = $collection->filter(function ($item) {
+            return $item == "item2";
+        });
+
+        $this->assertCount(1, $result);
+        $this->assertEquals('item2', $result->first());
+    }
+
+    public function it_can_reduce_the_collection()
+    {
+        $array = [1, 2, 3];
+        $collection = Collection::new($array);
+
+        $result = $collection->reduce(function ($accumulator, $item) {
+            $accumulator += $item;
+
+            return $accumulator;
+        });
+
+        $this->assertEquals(6, $result->first());
+    }
 }
