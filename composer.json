@@ -1,0 +1,19 @@
+{
+  "name": "AndersWJ/collection",
+  "description": "My collection",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Anders Welle Jensen",
+      "email": "anderswelle@hotmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Awj\\": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
